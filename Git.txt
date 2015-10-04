@@ -3,43 +3,83 @@
 Видео c Торвальдсом: http://www.youtube.com/watch?v=BtAlN4MaBr8&list=PLF9F847AC0AAA6735
 Видео от LoftBlog: http://www.youtube.com/watch?v=PEKN8NtBDQ0&list=PLY4rE9dstrJyTdVJpv7FibSaXB4BHPInb
 
+Для Windows! Для Unix/Mac есть нюансы (см. в учебном курсе http://githowto.com/ru)
+
 В системной переменной Path можно прописать сам Git.exe (c:\Program Files\Git\bin\) и работать с ним,
 но элегантнее работать с Git-bash.exe (c:\Program Files\Git\).
 
+При первом запуске установка имени и электронной почты:
+	git config --global user.name "Your Name"
+	git config --global user.email "your_email@whatever.com"
+
+Параметры установки окончаний строк:
+	git config --global core.autocrlf true
+	git config --global core.safecrlf true
+
 Сосздание локального репозитория по текущей директории:
-git init
+	git init
 
-Индексация изменения во всех файлах:
-git add . 
+Добавление и индексация изменения в локальном репозитории для всех в текущем каталоге и подкаталогах (.) и для конкретного файла:
+	git add . 
+	git add имя_файла
 
-Индексация конкретного файла:
-git add имя_файла
+Коммит изменений в локальный репозиторий. 
+Если не указать комментарий (-m "Some comment"), то откроется редактор, казанный в переменной среды GIT_EDITOR.
+С notepad пока не получилось и приходится писать через -m.
+	git commit -m "Comment"
 
-Коммит изменений в локальный репозиторий:
-git commit -m "Comment"
+Проверка состояния репозитория:
+	git status
 
-Просмотр статуса изменений:
-git status
+==================================================================================	
+Лог:
+	git log												расширенный полный список
+	git log --pretty=oneline							однострочный полный список
+	git log --pretty=oneline --max-count=2				последние 2 коммита
+	git log --pretty=oneline --since='5 minutes ago'	за последние 5 минут
+	git log --pretty=oneline --until='5 minutes ago'	до 5 минут назад
+	git log --pretty=oneline --author=<your name>		конкретного автора
+	git log --pretty=oneline --all						все
 
+	С извращениями:
+	git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'
+1ee23b9 Sun Oct 4 22:12:42 2015 +0300 Added HTML header (DAY644)
+d3a3506 Sun Oct 4 22:06:28 2015 +0300 Added standard HTML page tags (DAY644)
+dcb4a40 Sat Oct 3 23:12:38 2015 +0300 Add h1 tag (DAY644)
+99180b4 Sat Oct 3 22:19:33 2015 +0300 First commit, уот так уот! (DAY644)
+	
+	git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+* 1ee23b9 2015-10-04 | Added HTML header (HEAD -> master) [DAY644]
+* d3a3506 2015-10-04 | Added standard HTML page tags [DAY644]
+* dcb4a40 2015-10-03 | Add h1 tag [DAY644]
+* 99180b4 2015-10-03 | First commit, уот так уот! [DAY644]
+
+	Давайте рассмотрим его в деталях:
+
+		--pretty="..." — определяет формат вывода.
+		%h — укороченный хэш коммита
+		%d — дополнения коммита («головы» веток или теги)
+		%ad — дата коммита
+		%s — комментарий
+		%an — имя автора
+		--graph — отображает дерево коммитов в виде ASCII-графика
+		--date=short — сохраняет формат даты коротким и симпатичным	
+==================================================================================	
+Алиасы для ленивых:
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+git config --global alias.type 'cat-file -t'
+git config --global alias.dump 'cat-file -p'
+
+==================================================================================	
+   
 Привязка локального репозитория к внешнему репозиторию
 (копируем со станицы репозитория в github.com):
-git remote add origin https://github.com/DAY644/RepoName.git
+   git remote add origin https://github.com/DAY644/RepoName.git
 
 Заливка локального репозитория во внешний репозиторий
 (копируем со станицы репозитория в github.com):
-git push -u origin master
-
-===========================================================
-…or create a new repository on the command line
-
-echo # WTF >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/DAY644/WTF.git
-git push -u origin master
-
-…or push an existing repository from the command line
-
-git remote add origin https://github.com/DAY644/WTF.git
-git push -u origin master
+   git push -u origin master
