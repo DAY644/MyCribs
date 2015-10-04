@@ -1,0 +1,45 @@
+Сайт Git: http://git-scm.com/
+Учебный курс: http://githowto.com/ru
+Видео c Торвальдсом: http://www.youtube.com/watch?v=BtAlN4MaBr8&list=PLF9F847AC0AAA6735
+Видео от LoftBlog: http://www.youtube.com/watch?v=PEKN8NtBDQ0&list=PLY4rE9dstrJyTdVJpv7FibSaXB4BHPInb
+
+В системной переменной Path можно прописать сам Git.exe (c:\Program Files\Git\bin\) и работать с ним,
+но элегантнее работать с Git-bash.exe (c:\Program Files\Git\).
+
+Сосздание локального репозитория по текущей директории:
+git init
+
+Индексация изменения во всех файлах:
+git add . 
+
+Индексация конкретного файла:
+git add имя_файла
+
+Коммит изменений в локальный репозиторий:
+git commit -m "Comment"
+
+Просмотр статуса изменений:
+git status
+
+Привязка локального репозитория к внешнему репозиторию
+(копируем со станицы репозитория в github.com):
+git remote add origin https://github.com/DAY644/RepoName.git
+
+Заливка локального репозитория во внешний репозиторий
+(копируем со станицы репозитория в github.com):
+git push -u origin master
+
+===========================================================
+…or create a new repository on the command line
+
+echo # WTF >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/DAY644/WTF.git
+git push -u origin master
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/DAY644/WTF.git
+git push -u origin master
